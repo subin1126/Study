@@ -14,13 +14,16 @@
 //     console.log(index+"번 값", item);
 // });
 
-const arr = [10, 20, 30, 40, 50];
+//const arr = [10, 20, 30, 40, 50];
 
-arr.map(function(item, index) {
-    console.log(index+"번 값", item);
-});
+// arr.map(function(item, index) {
+//     console.log(index+"번 값", item);
+// });
 
-arr.map((item, index) => {
-    console.log(index+"번 값", item*2);
-});
+// arr.map((item, index) => {
+//     console.log(index+"번 값", "double" + item );
+// });
 
+const days = ["Mon", "Tue", "Wed", "Thus", "Fri"];
+const smilmingDays = days.map((day, index) => `#${index} ${day}`);
+console.log(smilmingDays);

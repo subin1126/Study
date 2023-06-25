@@ -12,6 +12,12 @@ function mix(str1, str2){
 
 console.log(mix(str1,str2));
 
+function solution(str1, str2){
+    return [...str1].map((x, idx)=> x+str2[idx]).join("");
+}
+
+console.log(solution(str1, str2));
+
 // var str1 = 'aaaaa';
 // var str2 = 'bbbbb';
 // var str = '';
