@@ -1,5 +1,7 @@
-// const nums = Array(20).map((_, i) => i);
-// console.log(nums[0]);
+const nums = Array(20).fill().map((_, i) => i);
+console.log(nums);
+
+//nums = Array(20).fill().map((_, i) => i);
 
 // const arr = Array(5).fill().map((i, s) => s);
 // console.log(arr);
@@ -24,6 +26,6 @@
 //     console.log(index+"번 값", "double" + item );
 // });
 
-const days = ["Mon", "Tue", "Wed", "Thus", "Fri"];
-const smilmingDays = days.map((day, index) => `#${index} ${day}`);
-console.log(smilmingDays);
+// const days = ["Mon", "Tue", "Wed", "Thus", "Fri"];
+// const smilmingDays = days.map((day, index) => `#${index} ${day}`);
+// console.log(smilmingDays);
