@@ -16,11 +16,12 @@ console.log(nums);
 //     console.log(index+"번 값", item);
 // });
 
-//const arr = [10, 20, 30, 40, 50];
+const arr = [10, 20, 30, 40, 50];
 
-// arr.map(function(item, index) {
-//     console.log(index+"번 값", item);
-// });
+//                key, value 
+arr.map(function(item, index) {
+    console.log(index+"번 값", item);
+});
 
 // arr.map((item, index) => {
 //     console.log(index+"번 값", "double" + item );
