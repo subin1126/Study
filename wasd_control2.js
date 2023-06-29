@@ -40,5 +40,4 @@ function solution(numLog) {
     }).join('')
 }
 
-
 console.log(solution([0, 1, 0, 10, 0, 1, 0, 10, 0, -1, -2, -1]));
