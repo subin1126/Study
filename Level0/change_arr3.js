@@ -33,4 +33,23 @@ function solution(arr) {
     return arr;
 }
 
-console.log(solution([1,2,3,100,99,98]));
+//console.log(solution([1,2,3,100,99,98]));
+
+//조건에 맞게 수열 변환하기 3
+// function solution(arr, k) {
+//     let ret = [];
+//     for(let i =0; i<arr.length; i++){
+//         if(k%2 === 1){
+//             ret.push(arr[i]*k);
+//         } else if(k%2===0){
+//             ret.push(arr[i]+k);
+//         }
+//     }
+//     return ret;
+// }
+
+const solution = (arr, k) => arr.map(v => k % 2 ? v * k : v + k)
+
+
+
+console.log(solution([1,2,3,100,98], 2));
