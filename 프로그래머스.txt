@@ -1,0 +1,820 @@
+프로그래머스 풀면서 알게되는 정보들 적기!
+
+console.log(str); 은 newline 을 추가하여 출력한다
+
+process.stdout.write(str); 을 사용하면
+개행문자가 자동으로 추가되지 않으므로 출력 후
+개행이 필요한 경우 직접 추가해야 한다
+
+문자열 반복출력
+
+방법1.
+console.log(str.repeat(n));
+
+방법2.
+str = ''; 로 바꾸고
+ for (let i = 0; i < n; i += 1) {
+        str += input[0]
+    }
+    console.log(str);
+
+방법3.
+for(i=0; i<n; i++) {
+  process.stdout.write(str);
+}
+
+방법4.
+Array.from(Array(n).keys()).map((el)=> a+=str);
+console.log(a);
+
+
+
+대문자 -> 소문자 변환 함수말고
+조건 반복 정규식 써서 하고 싶은데 ㅠㅠ
+
+aBcDEf => AbCdeF 이렇게 되게
+
+일단 걍 이렇게함
+str = input[0];
+    let answer = '';
+    for(let i in str){
+        if(str[i].toUpperCase() === str[i]){
+            answer += str[i].toLowerCase();
+        } else {
+            answer += str[i].toUpperCase();
+        }
+    }
+    console.log(answer);
+
+str = input[0].split('');
+    str.forEach((value, index) => {
+        if (value === value.toUpperCase()) {
+            str[index] = value.toLowerCase();
+        } else {
+            str[index] = value.toUpperCase();
+        }
+    });
+    console.log(str.join(''));
+
+str = input[0];
+    const regex = /[A-Z]/
+    // const array = []
+    // for (let i = 0; i < str.length; i++) {
+    //     regex.test(str[i]) ? array.push(str[i].toLowerCase()) : array.push(str[i].toUpperCase());
+    // }
+    // console.log(array.join(''))
+    console.log([...str].map((v)=> regex.test(v) ? v.toLowerCase() : v.toUpperCase()).join(''))
+
+let input;
+
+rl.on('line', (line) => {
+  input = [...line];
+}).on('close', () => {
+  console.log(
+    input.map((char) => (/[a-z]/.test(char) ? char.toUpperCase() : char.toLowerCase())).join(''),
+  );
+
+헉헉 내가 원했던 방법1.
+ str = input[0];
+    let answer = "";
+    for(let i = 0 ; i < str.length ; i++){
+        const char = str.charCodeAt(i);
+        if(char >= 97 && char <= 122)
+            answer+= String.fromCharCode(char-32);
+        else
+            answer+= String.fromCharCode(char+32);
+    }
+    console.log(answer);
+
+const lineUpper = line.toUpperCase()
+    const lineLower = line.toLowerCase()
+
+    const word = Array.from(line).map((letter, i) => {
+        if (letter !== lineUpper[i]) return lineUpper[i]
+        if (letter !== lineLower[i]) return lineLower[i]
+        throw new Error('it\'s same upper and lower')
+    }).join('')
+    console.log(word)
+
+----------------------------------------------
+문자열 돌리기
+str = input[0];
+    for(let i of str){
+        console.log(i)
+    }
+
+
+ [...str].forEach(c => console.log(c))
+
+for(let i = 0 ; i < str.length; i++) console.log(str[i])
+
+[...str].map(x=>console.log(x))
+
+ line.split('').forEach((v) => console.log(v))
+
+str.split('').map(v => console.log(v))
+
+str.split('').forEach(s => console.log(s));
+-------------------------------
+for ...in 반복문 : 객체의 모든 열거 가능한 속성에 대해 반복
+for ...of 반복문 : [Symbol.iterator] 속성을 가지는 컬렉션 전용
+forEach : Array만 반복할 수 있음
+const arr = [1,2,3,4,5];
+
+arr.forEach(item => {
+  console.log(item); //1 2 3 4 5
+});
+
+var iterable = [10, 20, 30];
+
+for(var value of iterable) {
+  console.log(value); // 10, 20 , 30
+}
+--------------------------------
+입력받은 수 홀짝
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+let input = [];
+
+rl.on('line', function (line) {
+    input = line.split(' ');
+}).on('close', function () {
+    n = Number(input[0]);
+
+    if(n % 2 === 0){
+        console.log(`${n} is even`);
+    } else {
+        console.log(`${n} is odd`);
+    }
+});
+
+const result = Number(line) % 2 ? 'odd' : 'even'
+console.log(line, 'is', result)
+
+console.log(n%2===0? `${n} is even`:`${n} is odd`)
+
+--------------------------------------
+splice 써치하다 발견
+https://www.daleseo.com/js-array-slice-splice/
+배열 생성
+nums = Array(20).fill().map((_, i) => i)
+Array(20) : 길이가 20인 새로운 배열 객체를 생성 : undefined로 설정
+.fill() : 모든 요소를 기본값으로 채움 기본값 undefined
+.map() : 콜백함수를 인자로 받음 (_, i) => i
+현재 요소 자체에는 관심이 없기 때문에,
+밑줄(`_`)을 사용하여 해당 값을 사용하지 않는다는 것을 표시하는 관례
+콜백함수는 간단히 인덱스 `i`를 각 요소의 값으로 반환
+즉, 원래 배열과 동일한 길이의 새로운 배열 생성,
+    각 요소는 해당하는 인덱스 값으로 대체된다
+
+const arr = Array(5).fill();
+console.log(arr); //undefined 5개나옴
+
+const arr1 = Array(5).fill('a');
+console.log(arr1); //'a' 5개 나옴
+
+const arr2 = Array(5).fill().map((item, index) => index + 1);
+console.log(arr2); //1,2,3,4,5
+
+Array()로 배열을 생성한 후,
+fill()을 사용해 각 요소의 빈자리를 만들어준다
+map() 함수로 다섯자리를 순회하면서
+각 인덱스에 1을 더한 값을 출력해 배열로 만든다
+1을 더하지 않았으면 0,1,2,3,4 출력
+
+map() : 값과 인덱스를 인자로 받아 자동으로 for문을 돌려 값을 빼도록 해준다
+map()의 인덱스 인자는 기본 for문 방식의 index와 같은 역할
+
+Array(5).fill().map((item, index) => index);
+map()은 배열의 각 요소에 대해 콜백 함수를 호출하고,
+콜백 함수의 반환값으로 새로운 배열을 생성
+여기서 'item'은 현재 요소에 대한 참조,
+'index'는 현재 요소의 인덱스
+
+콜백함수 ((item, index) => index) 에서는
+현재 요소 item을 무시하고, 대신 인덱스 'index'를 반환
+따라서 배열의 각 요소는 해당 요소의 인덱스 값으로 변경된다
+따라서 최종적으로 배열은 [0,1,2,3,4]
+
+'item' 매개변수가 현재 요소에 대한 참조를 나타내지만,
+해당 코드에서는 사용되지 않으므로 무시된다
+대신 'index' 매개변수를 사용하여 각 요소의 인덱스 값을
+반환하도록 설정된 것
+
+자바스크립트 underscore라는 개념도 따로 있대 이거랑 다르긴한데
+
+-----------------------------------------------
+slice() : 원본 배열이 그대로 보존되며, 출력에만 영향
+
+splice() : 원본 배열에서 삭제, 삽입 변화가능
+
+console.log(nums.splice(5, 0, -5, -6, -7));
+인덱스 5가 가리키는 값부터 아무값도 삭제하지 않고 삽입
+
+console.log(nums.splice(5, 3, 10, 20));
+인덱스 5부터 3개 삭제하고 그자리에 10,20추가
+-----------------------------------------------
+문자열 겹쳐쓰기
+
+function solution(my_string, overwrite_string, s) {    
+    return my_string.slice(0,s)+overwrite_string+my_string.slice(s+overwrite_string.length);
+}
+
+function solution(my_string, overwrite_string, s) {
+     let result = "";
+  for (let i = 0; i < my_string.length; i++) {
+    if (i >= s && i < s + overwrite_string.length) {
+      result += overwrite_string[i - s];
+    } else {
+      result += my_string[i];
+    }
+  }
+  return result;
+}
+
+answer += my_string.substr(0,s);
+    answer += overwrite_string;
+    answer += my_string.substr(overwrite_string.length+s,my_string.length)
+
+function solution(my_string, overwrite_string, s) {    
+    return my_string.slice(0,s)+overwrite_string+my_string.slice(s+overwrite_string.length);
+}
+==================================================
+map 함수
+
+map함수는 callbackFunction을 실행한 결과를 가지고 
+새로운 배열을 만들 때 사용
+
+array.map(callbackFunction(currenValue, index, array), thisArg)
+
+currentValue : 배열 내 현재 값
+index : 배열 내 현재 값의 인덱스
+array : 현재 배열
+thisArg : callbackFunction 내에서 this로 사용될 값
+
+const days = ["Mon", "Tue", "Wed", "Thus", "Fri"];
+
+모든 배열의 값에 Function을 실행하는 Method 이다
+
+const smilmingDays = days.map(day => 'smile ${day}');
+console.log(smilmingDays);
+
+return을 함축적으로 포함한걸 알 수 있음
+
+
+const smilmingDays = days.map((day, index) => '#${index} ${day}');
+console.log(smilmingDays);
+
+여기서 day는 위 array에 각각의 값일 것이고,
+두번째 argument인 index는 현재 있는 숫자들일 것
+===============================================
+홀짝에 따라 다른 값 반환하기
+
+n = 7, result = 16
+n이 홀수면, n이내에 있는 홀수들의 합이 result
+n = 7이면, 1 + 3 + 5 + 7 => 16
+
+홀수면 => if(n%2 ===1)
+n 이내에 있는 홀수 => 이걸 어케한담
+
+홀수하면 생각나는게 2n-1 or 2n+1
+i = 1 ~ (n=7)
+
+2 * 1 - 1 = 1
+2 * 2 - 1 = 3
+2 * 3 - 1 = 5
+2 * 4 - 1 = 7
+----------------------------------
+n = 10, result = 220
+n이 짝수면, n이내에 있는 짝수들의 제곱의 합이 result
+
+짝수면 => if(n%2 === 0)
+n 이내에 있는 짝수 ,,
+
+짝수는 2n인데
+n = 10이면, 2, 4, 6, 8, 10 각 수의 제곱의 합
+
+2 * 1 = 2 ** 2 = 4
+2 * 2 = 4 ** 2 = 16
+2 * 3 = 6 ** 2 = 36
+2 * 4 = 8 ** 2 = 64
+2 * 5 = 10 ** 2 = 100
+
+
+n = 4 => 2 4 각 수의 제곱의 합
+4 + 16 = 20
+======================================
+코드 처리하기
+
+문자열 code를 앞에서부터 읽으면서 => for, charAt 생각남
+만약 문자가 "1" 이면 mode를 바꾼다
+mode에 따라 code를 읽어가면서 문자열 ret을 만들어 낸다
+
+mode는 0과 1이 있으며, idx를 0부터 (code의 길이 -1)까지 1씩 키워나가면서
+code[idx]의 값이 다음과 같이 행동
+
+mode = 0 or 1
+
+for(let i = 0; i<=code.length-1; i++) 로 code[idx] 탐방
+
+mode === 0
+code[idx]가 "1"이 아니면,
+idx가 짝수일 때만 ret의 맨 뒤에 code[idx]를 추가한다
+
+code[idx]가 "1"이면 mode를 0에서 1로 바꾼다
+---------------------------------------
+mode === 1
+code[idx]가 "1"이 아니면,
+idx가 홀수일때만 ret의 맨 뒤에 code[idx]를 추가한다
+
+code[idx]가 "1" 이면 mode를 1에서 0으로 바꾼다
+
+문자열 code를 통해 만들어진 문자열 ret를 return 하는 함수를 만들어라
+
+단, 시작할 때 mode는 0이며,
+return 하려는 ret가 만약 빈 문자열이라면,
+대신 "EMPTY"를 return 한다
+
+code = "abc1abc1abc", result = "acbac" 
+
+오 이해함
+
+mode가 0일때 idx값이 짝수인 애들만 ret에 추가함
+mode가 1일때 idx값이 홀수인 애들만 ret에 추가함
+mode는 1을 만날때마다 변함. 시작은 0부터.
+
+   i    0 1 2 3 4 5 6 7 8 9 10
+code[i] a b c 1 a b c 1 a b  c
+  mode  0 0 0 1 1 1 1 0 0 0  0
+        짝홀짝
+=> mode가 0일땐 i가 짝수만 => a, c => ret에 추가
+   mode가 1일땐 i가 홀수만 => b => ret에 추가
+
+---------------------------------
+function solution(code) {
+    var mode = 0;
+    var ret = '';
+
+    for (let i = 0; i <= code.length - 1; i++) { //문자열 탐색 중
+        if (mode === 0 && (i % 2 === 0) && code[i] != '1') {
+            ret += code[i];
+        }
+        if (code[i] === '1') {
+            mode = 1;
+            i++;
+        }
+        if(mode === 1 && (i % 2 === 1) && code[i] != '1'){
+            ret += code[i];
+        }
+        
+    }
+    return ret;
+}
+
+console.log(solution("abc1abc1abc")); // "acbac"
+=> 지금 acbb나옴 ㅋㅎㅋㅎ
+
+
+for(let i = 0; i<=1; i++){
+    console.log(i); // i=0일때 j 0~9돌고, 1=1변환 후 j 0~9
+    for(let j = 0; j<10; j++){
+        console.log(j);
+    }
+}
+뿌에에에엥 왜 안될까~!
+
+그럼 동시에 해결하지 말고 모든 상황을 if하나하나로 해결해보자
+엥 그러니까 됨 하! 왜 한번에 하니까 안되징
+
+일급함수, 클로져, 자유변수, 쉐도우 이건 또 뭐지
+
+=======================================
+등차수열의 특정한 항만 더하기
+
+으악 등차수열 기억나 그래 ㅋㅋㅋㅋㅋㅋ
+2n-1 의 합 뭐 이런거 아님?
+
+a : 첫째항
+d : 공차
+included : 길이가 n인 boolean 배열
+
+등차수열의 1항부터 n항까지
+included가 true인 항들만 더한 값 return
+
+included에는 true가 반드시 하나 존재함
+
+a = 3, d = 4
+included : [true, false, false, true, true] = n = included.length = 5
+	     3     3+4
+		    7     7+4
+			  11    11+4
+				 15   15+4
+				       19
+=> 3 + 15 + 19 = 37
+
+3 = 3
+3+4 = 7
+3+4+4 = 11
+3+4+4+4 = 15
+3+4+4+4+4 = 19
+
+3 + 7 + 11 + 15 + 19
+   10
+        21
+	     36         
+		 55
+a = 7, d = 1
+included : [false, false, false, true, false, false, false]
+              7      8      9     10    11      12     13
+=> 10
+
+일단 included안에 true인 애들만 뽑아써야하니까
+included를 탐색하면서 included[i] === true 일 때에서
+시작해야할 것 같은데,,
+
+아이디어 1.
+첫번째 for문으로 주어진 등차수열 계산
+중첩 for문으로 등차수열로 true를 만날때마다 
+count안에 넣어서 합 구하기
+
+해결~~!! 눈눌루나난~~~~
+
+===========================================
+사람들이 reduce를 많이 사용한다.........
+reduce 함수는 배열의 각 요소를 순회하며
+callback 함수의 실행 값을 누적하여 하나의 결과값을 반환
+
+arr.reduce(callback [, initialValue])
+
+파라미터
+1. callback function
+
+4가지 인수를 가진다
+
+- accumulator : callback 함수의 반환값을 누적
+- currentValue : 배열의 현재 요소
+- index(Optional) : 배열의 현재 요소의 인덱스
+- array(Optional) : 호출한 배열
+
+콜백함수 함수의 반환 값은 accumulator에 할당되고,
+순회중 계속 누적되어 최종적으로 하나의 값을 반환한다
+
+2. initialValue(Optional)
+
+- 최초 콜백함수 실행 시 accumulator 인수에 제공되는 값,
+  초기값을 제공하지 않을 경우 배열의 첫번째 요소를 사용하고,
+  빈 배열에서 초기값이 없을 경우 에러 발생
+
+반환 값
+- 배열을 순서대로 불러 각 요소에 대해 콜백 함수를 실행한 결과를 누적한 값
+
+배열.reduce((누적값, 현잿값, 인덱스, 요소) => { return 결과 }, 초깃값);
+
+알겠음
+
+======================================
+
+주사위 게임 2
+
+1 ~ 6 주사위 3개가 있음
+각 주사위를 굴렸을 때 나온 숫자를 각각 a, b, c
+세 숫자가 모두 다르다면 a + b + c 점을 얻는다
+
+세 숫자 중 어느 두숫자는 같고,
+나머지 다른 숫자는 다르다면
+(a + b + c) * (a제곱 + b제곱 + c제곱) 점을 얻는다
+
+세 숫자가 모두 같다면
+(a + b + c) * (a제곱 + b제곱 + c제곱) * (a세제곱 + b세제곱 + c세제곱)
+
+======================================
+Set
+- set 객체는 중복되지 않는 유일한 값들의 집합
+- set 객체는 다음과 같은 특징을 가진다
+ - 1. 동일한 값을 중복하여 포함할 수 없다
+ - 2. 요소 순서에 의미가 없다
+ - 3. 인덱스로 요소에 접근할 수 없다
+
+set 객체는 수학적 집합을 구현하기 위한 자료구조이다
+set을 통해 교집합, 합집합, 차집합, 여집합 등을 구현할 수 있다
+
+1. set 객체의 생성
+set 객체는 set 생성자 함수로 생성한다
+const set = new Set();
+
+인수를 전달하지 않으면, 빈 set 객체가 생성된다
+set 생성자 함수는 이터러블을 인수로 받아 set 객체를 생성한다
+이때 이터러블의 중복된 값은 set 객체에 요소로 저장되지 않는다
+
+const set = new Set();
+console.log(set); // Set(0) {}
+
+const set1 = new Set([1,2,3,3]);
+console.log(set1); // Set(3) {1,2,3}
+
+const set2 = new Set('hello');
+console.log(set2); //Set(4) {"h", "e", "l", "o"}
+
+그래서 set을 사용해서 배열에서 중복된 요소를 제거할 수 있다
+
+const uniq = array => array.filter((v, i, self) => self.indexOf(v) === i);
+cnosole.log(uniq([2,1,2,3,4,3,4])); // [2,1,3,4]
+
+const uniq = array => [...new Set(array)];
+console.log(uniq([2,1,2,3,4,3,4])); // [2,1,3,4]
+
+2. 요소 개수 확인
+
+set 객체의 요소 개수를 확인할 때는 Set.prototype.size 프로퍼티를 사용한다
+
+size 프로퍼티는 setter 함수없이 getter 함수만 존재하는 접근자 프로퍼티.
+그래서 size 프로퍼티에 숫자를 할당하여 set 객체의 요소개수를 변경할 수 없다
+
+const set = new Set([1,2,3]);
+
+console.log(Object.getOwnPropertyDescriptor(Set.prototype, 'size'));
+// {set: undefined, enumerable: false, configurable: true, get: f}
+
+set.size = 10; //무시된다
+console.log(set.size); //3
+
+3. 요소 추가
+set 객체에 요소를 추가할 때는 Set.prototype.add 메서드를 사용하면 된다
+add 메서드는 새로운 요소가 추가된 Set 객체를 반환한다
+
+const set = new Set();
+
+set.add(1).add(2).add(2); //중복된 값은 무시된다
+console.log(set); // Set(2) {1,2}
+
+set 객체는 객체나 배열과 같이 자바스크립트의 모든 값을 요소로 저장할 수 있다
+
+const set = new Set();
+
+set
+   .add(1)
+   .add('a')
+   .add(true)
+   .add(undefined)
+   .add(null)
+   .add({})
+   .add([]);
+
+console.log(set);
+
+4. 요소 존재 여부 확인
+Set 객체에 특정 요소가 존재하는지 확인하려면 Set.prototype.has 메서드 사용.
+has는 요소가 있는지 없는지에 따라 불리언값을 반환한다.
+
+const set = new Set([1,2,3]);
+
+console.log(set.has(2)); //true
+console.log(set.has(4)); //false
+
+5. 요소 삭제
+set 객체의 특정 요소를 삭제하려면, Set.prototype.delete 사용
+delete 메서드는 삭제 성공여부를 나타내는 불리언 값을 반환
+
+delete 메서드에는 인덱스가 아니라 삭제하려는 요소값을 인수로 전달해야한다
+*set 객체는 인덱스를 갖지 않기 때문이다*
+
+delete는 불리언 값을 반환하기때문에 add처럼 여러개를 붙여서 사용할 수 없다
+(add는 객체를 리턴하기때문에 여러개를 동시에 사용가능함)
+
+const set = new Set([1,2,3]);
+
+set.delete(2);
+console.log(set); //Set(2) {1,3}
+
+set.delete(1);
+console.log(set); //Set(1) {3}
+
+const set = new Set([1,2,3]);
+
+set.delete(1).delete(2); 
+// delete는 불리언 값을 반환해서 에러 반환
+
+6. 요소 일괄 삭제
+set 객체의 모든 요소를 일괄삭제하려면 Set.prototype.clear 메서드 사용
+clear는 언제나 undefined를 반환한다
+
+const set = new Set([1,2,3]);
+
+set.clear();
+console.log(set); // Set(0) {}
+
+7. 요소 순회
+set 객체의 요소를 순회하려면 Set.prototype.forEach 메서드 사용
+forEach 메서드에 콜백함수를 인수로 넣어주게 되는데,
+콜백함수는 3개의 인수를 전달받는다
+(현재 순회중인 요소값, 현재 순회중인 요소값, 현재 순회중인 set 객체 자체)
+
+첫번째, 두번째 인수가 같은 이유는 Array.prototype.forEach 메서드와
+인터페이스를 통일하기 위해서다
+(Array.prototype.forEach는 두번째 인수로 인덱스를 전달받지만,
+ set은 순서에 의미가 없기 때문에 인덱스를 받지 않는다)
+
+const set = new Set([1,2,3]);
+
+set.forEach((v, v2, set) => console.log(v, v2, set));
+
+우선 set 객체는 이터러블이기 때문에 for ..of문으로 순회할 수 있고,
+스프레드 문법과, 배열 디스트럭처링의 대상이 될 수도 있다
+
+const set = new Set([1,2,3]);
+
+// Set 객체는 Set.prototype의 Symbol.iterator 메서드를 상속받는 이터러블이다
+console.log(Symbol.iterator in set); //true
+
+// 이터러블인 Set 객체는 for...of 문으로 순회할 수 있다
+for(const value of set) {
+  console.log(value); // 1 2 3
+}
+
+// 이터러블인 Set 객체는 스프레드 문법의 대상이 될 수 있다
+console.log([...set]); // [1,2,3]
+
+==============================================
+원소들의 곱과 합
+
+num_list : 정수가 담긴 리스트
+
+모든 원소들의 곱이 모든 원소들의 합의 제곱보다 작으면 1을,
+크면 0을 return
+
+num_list : [3,4,5,2,1], result : 1
+3 + 4 + 5 + 2 + 1 = 15의 제곱 = 225
+3 * 4 * 5 * 2 * 1 = 120
+ 12
+     60
+          120
+
+num_list : [5,7,8,3], result : 0
+5 + 7 + 8 + 3 = 23의 제곱 = 529
+5 * 7 * 8 * 3 = 840
+      
+============================================
+이어 붙인 수
+
+num_list : 정수가 담긴 리스트
+num_list의 홀수만 순서대로 이어 붙인 수와,
+짝수만 순서대로 이어 붙인 수의 합을 return
+
+적어도 한 개씩의 짝수와 홀수가있음
+
+num_list : [3,4,5,2,1], result : 393
+
+351 + 42 = 393
+ 홀   짝
+
+============================================
+마지막 두 원소
+
+정수 리스트 num_list가 주어질 때,
+마지막 원소가 그전 원소보다 크면,
+마지막 원소에서 그전 원소를 뺀 값을,
+
+마지막 원소가 그전 원소보다 크지 않다면,
+마지막 원소를 두 배 한 값을 추가하여 return
+
+num_list : [2,1,6], result : [2,1,6,5]
+
+마지막 원소 : 6
+그전 원소 : 1
+6 > 1
+=> 6 - 1 = 5
+[2,1,6] + 5 = [2,1,6,5]
+
+num_list : [5,2,1,7,5]
+
+마지막 원소 : 5
+그전 원소 : 7
+5 < 7
+=> 5 * 2 = 10
+[5,2,1,7,5] + 10 = [5,2,1,7,5,10]
+
+===========================================
+수 조작하기1
+
+n : 정수, control : 문자열
+control은 "w", "a", "s", "d" 의 4개의 문자로 이루어져 있음
+
+control의 앞에서부터 순서대로 문자에 따라 n의 값을 바꾼다
+
+"w" : n이 1 커짐
+"s" : n이 1 작아짐
+"d" : n이 10 커짐
+"a" : n이 10 작아짐
+
+위 규칙에 따라 n을 바꿨을 때,
+가장 마지막에 나오는 n의 값을 return
+
+n : 0, control : "wsdawsdassw"
+
+w => 1
+s => 0
+d => 10
+a => 0
+w => 1
+s => 0
+d => 10
+a => 10
+s => -1
+s => -2
+w => -1
+
+result : -1
+
+======================================
+수 조작하기 2
+
+numLog : 정수 배열
+처음 numLog[0]부터 시작해 wasd
+
+"w" : n이 1 커짐
+"s" : n이 1 작아짐
+"d" : n이 10 커짐
+"a" : n이 10 작아짐
+
+매번 조작을 할 때마다 결과값을 기록한 정수 배열 : numLog
+
+numLog : [0, 1, 0, 10, 0, 1, 0, 10, 0, -1, -2, -1]를보고
+result : "wsdawsdassw" 를 return 
+
+
+[0, 1, 0, 10, 0, 1, 0, 10, 0, -1, -2, -1]
+				    
+======================================
+수열과 구간 쿼리 3
+
+arr : 정수 배열
+queries : 2차원 정수 배열
+queries의 원소는 각각 하나의 query를 나타내며,
+[i, j]꼴
+
+각query 마다 순서대로 arr[i]의 값과 arr[j]의 값을 서로 바꾼다
+
+return arr;
+
+arr : [0, 1, 2, 3, 4]
+queries : [[0,3], [1,2], [1,4]]
+
+[0,3] => arr[0]이랑 arr[3]이랑 자리 바꿔
+	   0           3
+0 1 2 3 4 => 3 1 2 0 4
+
+[1,2] => arr[1]이랑 arr[2]랑 자리 바꿔
+	   1	      2
+3 1 2 0 4 => 3 2 1 0 4
+
+[1,4] => arr[1]이랑 arr[4]랑 자리 바꿔
+	   2	     4
+3 2 1 0 4 => 3 4 1 0 2
+
+[3, 4, 1, 0, 2] return
+
+====================================
+수열과 구간 쿼리 2
+
+       0  1  2  3  4
+arr : [0, 1, 2, 4, 3]
+queries : [[0,4,2], [0,3,2], [0,2,2]]
+
+queries의 원소는 각각 하나의 query를 나타내며,
+[s, e, k]
+
+각 query마다 순서대로 s <= i <= e 인 모든 i에 대해
+k보다 크면서 가장 작은 arr[i]를 찾는다
+
+쿼리의 순서에 맞게 답을 저장한 배열을 return
+
+단, 특정 쿼리의 답이 존재하지 않으면 -1을 저장
+
+긍까 [s, e, k]
+범위 s ~ e 사이에서 k보다 큰 값 중에 제일 작은 값 구하라고
+없으면 -1
+
+for each나 구조분해할당으로 [0,4,2] [0,3,2] [0,2,2]
+분해하고,
+
+const [a,b,c] = queries[i];
+
+======================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+

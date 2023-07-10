@@ -11,20 +11,20 @@
 // }
 
 //위의 코드를 for문으로 푼 것
-// function solution(arr, queries) {
-//     const copyAcc = [...arr];
+function solution(arr, queries) {
+    const copyAcc = [...arr];
   
-//     for (let i = 0; i < queries.length; i++) {
-//       const [to, from] = queries[i];
-//       console.log([to,from]);
-//       const box = copyAcc[to];
-//       copyAcc[to] = copyAcc[from];
-//       copyAcc[from] = box;
-//       //console.log(copyAcc);
-//     }
+    for (let i = 0; i < queries.length; i++) {
+      const [to, from] = queries[i];
+      console.log([to,from]);
+      const box = copyAcc[to];
+      copyAcc[to] = copyAcc[from];
+      copyAcc[from] = box;
+      //console.log(copyAcc);
+    }
   
-//     return copyAcc;
-//   }
+    return copyAcc;
+  }
 
 // function solution(arr, queries) {
 //     queries.forEach( ([a,b]) => {
@@ -40,19 +40,19 @@
 //     return arr;
 // }
 
-function solution(arr, queries) {
-    queries.map((x,i) => {
-        let a = arr[x[0]]
-        let b = arr[x[1]]
+// function solution(arr, queries) {
+//     queries.map((x,i) => {
+//         let a = arr[x[0]]
+//         let b = arr[x[1]]
 
-        //splice 교환, slice 삭제
-        arr.splice(x[0], 1, b);
-        console.log(arr);
-        arr.splice(x[1], 1, a);
-        console.log(arr);
-    });
+//         //splice 교환, slice 삭제
+//         arr.splice(x[0], 1, b);
+//         console.log(arr);
+//         arr.splice(x[1], 1, a);
+//         console.log(arr);
+//     });
 
-    return arr;
-}
+//     return arr;
+// }
 
 console.log(solution([0,1,2,3,4], [[0,3],[1,2],[1,4]]));
