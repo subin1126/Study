@@ -12,11 +12,14 @@ babbling
 ["aya", "yee", "u", "maa", "wyeoo"]
 
 result
-1
+1  => aya만 말할 수 있으니까 1
 
 babbling
 ["ayaye", "uuuma", "ye", "yemawoo", "ayaa"]
 
 result
-3
+3 => aya+ye  ye  ye+ma+woo => 3
 
+
+==============================================
+4
