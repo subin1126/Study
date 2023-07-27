@@ -1,14 +1,24 @@
 function solution(queries) {
+
+  let left = [];
+  let right = [];
   
-    for (let i = 0; i < queries.length; i++) {
-      var [to, from] = queries[i];
-      console.log(to);
-    }
-  
-    return 0;
+  for (let i = 0; i < queries.length; i++) {
+    var [to, from] = queries[i];
+    left.push(to);
+    right.push(from);
   }
-  
-//console.log(solution([[1,2],[3,4],[5,6]]));
+
+  let max = Math.max(...left);
+  let min = Math.min(...left);
+
+  let max2 = Math.max(...right);
+  let min2 = Math.min(...right);
+
+  return `left : ${max} ${min}, right : ${max2} ${min2}`;
+}
+
+console.log(solution([[1, 2], [3, 4], [5, 6]]));
 
 // let a, b, rest;
 // [a,b] = [10,20];
@@ -30,17 +40,17 @@ function solution(queries) {
 
 // console.log(solution(3, 10));
 
-function solution(arr, n){
-  for(let i =0 ; i<arr.length; i++){
-    if(arr[i] === n ){
-      return 1;
-    }
-  }
-  return 0;
+// function solution(arr, n){
+//   for(let i =0 ; i<arr.length; i++){
+//     if(arr[i] === n ){
+//       return 1;
+//     }
+//   }
+//   return 0;
 
-}
+// }
 
-console.log(solution([1,2,3,4,5], 3));
+// console.log(solution([1,2,3,4,5], 3));
 
 // var arr = [1,2,3,4,5];
 
