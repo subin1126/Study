@@ -77,8 +77,8 @@ var numbersReverse = numbers3.map(number => number * 2).reverse();
 ///console.log(numbersReverse);
 
 var numbers4 = [[1,2,3],[4,5,6],[7,8,9]];
-// var newNumbers4 = numbers4.map(array => array.map(number => number * 2));
-// console.log(newNumbers4);
+var newNumbers4 = numbers4.map(array => array.map(number => number * 2));
+//console.log(newNumbers4);
 
 var newNumbers5 = numbers4.map(function(array){
     //console.log(array);
