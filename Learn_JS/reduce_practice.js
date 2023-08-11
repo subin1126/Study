@@ -4,7 +4,7 @@ const numbers = [1,2,3,4,5,6,7,8,9,10];
 const sum = numbers.reduce(
     (acc, currentNumber) => acc +currentNumber);
 
-//console.log('sum = ', sum);
+console.log('sum = ', sum);
 
 function sumReducer(acc, currentNumber){
     return acc + currentNumber;
